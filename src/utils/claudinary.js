@@ -24,4 +24,4 @@ const uploadOnClaudinary = async (localFilePath) => {
     }
 }
 
-export {uploadOnClaudinary};
+export { uploadOnClaudinary }; 
