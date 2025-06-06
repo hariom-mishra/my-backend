@@ -8,11 +8,11 @@ const registerUser = asyncHandler(async (req, res) => {
     //get user details from front end
     const { username, fullName, email, password } = req.body;
     //validation - not empty, proper data
-    if ([fullName, username, email, password].some.apply((field) => field === "")) {
+    if ([fullName, username, email, password].some((field) => field === "")) {
         throw new ApiError(400, "all fields are required");
     }
     //check if user already exist - username and email
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or: [{ username }, { email }]
     })
 
@@ -53,7 +53,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(500, "Someting went wrong our side while registering user")
     }
     //send response
-    return res.status(201).json(ApiResponse(200, createdUser, "User registered successfully"))
+    return res.status(201).json(new ApiResponse(200, createdUser, "User registered successfully"))
 })
 
 export { registerUser };

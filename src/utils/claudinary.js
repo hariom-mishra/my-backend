@@ -16,7 +16,7 @@ const uploadOnClaudinary = async (localFilePath) => {
             resource_type: "auto"
         })
         //success
-        console.log("file uploaded successfully", response.url);
+        fs.unlinkSync(localFilePath);
         return response;
     } catch (error) {
         fs.unlinkSync(localFilePath);//remove locally saved temporary file as failed to upload
